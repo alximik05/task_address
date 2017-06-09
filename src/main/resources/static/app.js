@@ -4,26 +4,24 @@
 
 var MapGoogle = React.createClass({
     componentDidMount() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+        const moscow = {lat: 55.75222, lng: 37.61556};
+        const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
-            center: uluru
+            center: moscow
         });
         fetch('http://localhost:8181/loadAllAddresses')
             .then(response => {
-                console.log(response);
-                let a = response.json();
-                console.log(a);
-                return a;
+                return response.json();
             })
             .then(arr => {
-                console.log(arr);
+                arr.map(coordinate => {
+                    let latlng = new google.maps.LatLng(coordinate.latitude, coordinate.longitude);
+                    new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                    });
+                })
             });
-
-        var uluru = {lat: -25.363, lng: 131.044};
-        new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
     },
     render(){
         return (
