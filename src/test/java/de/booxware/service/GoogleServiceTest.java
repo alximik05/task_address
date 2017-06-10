@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class GoogleServiceTest {
 
-    private static final GoogleService googleService = new GoogleService();
+    private static final GoogleService GOOGLE_SERVICE = new GoogleService();
     private static final String MOSCOW_CITY = "Moscow";
     private static final String MOSCOW_CITY_RUS = "Москва";
     private static final String STREET = "Tverskaya";
@@ -40,7 +40,7 @@ public class GoogleServiceTest {
 
 
     private void checker(String placeInMoscow) {
-        Address fullAddress = googleService.getFullAddress(placeInMoscow);
+        Address fullAddress = GOOGLE_SERVICE.getFullAddress(placeInMoscow);
         assertThat(fullAddress.getAddressStr(), notNullValue());
         int lat = fullAddress.getLatitude().intValue();
         int lon = fullAddress.getLongitude().intValue();

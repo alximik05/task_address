@@ -15,11 +15,11 @@ import java.util.List;
 @Service
 public class AddressService {
 
-//    @Autowired
-//    private AddressDao addressDao;
-
     @Autowired
-    private AddressDaoStub addressDao;
+    private AddressDao addressDao;
+
+//    @Autowired
+//    private AddressDaoStub addressDao;
 
     @Autowired
     private GoogleService googleService;
