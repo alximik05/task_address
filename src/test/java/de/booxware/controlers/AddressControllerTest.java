@@ -50,8 +50,9 @@ public class AddressControllerTest {
         assertThat(ADDRESS_LIST.size(), is(3));
         Gson gson = new Gson();
         List list = gson.fromJson(addresses, List.class);
-        System.out.println(addresses);
         list.forEach(System.out::println);
+        assertThat(ADDRESS_LIST.get(0).getAddressStr(), is("Lugovoi"));
+        assertThat(ADDRESS_LIST.get(2).getLongitude(), is(60.00000000));
 
     }
 

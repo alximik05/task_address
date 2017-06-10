@@ -19,18 +19,16 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
-
-    @RequestMapping("/")
-    @GetMapping
+    @GetMapping("/")
     public String start() {
         return "startPage.html";
     }
 
-
     @PostMapping("/saveAddress")
     public String saveNewLocation(@RequestParam("address") String address) {
-        addressService.saveNewPosition(address);
-        return "startPage.html";
+        boolean isSave = addressService.saveNewPosition(address);
+        // todo add checks
+        return "redirect:/";
     }
 
     @GetMapping("/loadAllAddresses")

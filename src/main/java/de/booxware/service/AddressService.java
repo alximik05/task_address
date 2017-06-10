@@ -24,9 +24,14 @@ public class AddressService {
     @Autowired
     private GoogleService googleService;
 
-    public void saveNewPosition(String userAddress) {
-        Address fullAddress = googleService.getFullAddress(userAddress);
-        addressDao.save(fullAddress);
+    public boolean saveNewPosition(String userAddress) {
+        try {
+            Address fullAddress = googleService.getFullAddress(userAddress);
+            addressDao.save(fullAddress);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     public List<Address> getAllAddresses() {
