@@ -27,13 +27,13 @@ public class AddressController {
     }
 
 
-    @RequestMapping("/saveAddress")
-    public String saveNewLocation(String addressStr) {
-        addressService.saveNewPosition(addressStr);
-        return "startPage";
+    @PostMapping("/saveAddress")
+    public String saveNewLocation(@RequestParam("address") String address) {
+        addressService.saveNewPosition(address);
+        return "startPage.html";
     }
 
-    @RequestMapping(value = "/loadAllAddresses")
+    @GetMapping("/loadAllAddresses")
     @ResponseBody
     public String loadAllAddresses() {
         List<Address> allAddresses = addressService.getAllAddresses();

@@ -38,7 +38,7 @@ var Application = React.createClass({
         return (
             <div>
                 <h3>My Google Maps Demo</h3>
-                <form className="login" action="#" method="post">
+                <form action="saveAddress" method="post">
                     <label htmlFor="address">Address</label>
                     <input type="text" id="address" name="address" autoFocus="true"/>
                     <input type="submit" value="Add"/>
