@@ -53,7 +53,6 @@ public class AddressControllerTest {
         list.forEach(System.out::println);
         assertThat(ADDRESS_LIST.get(0).getAddressStr(), is("Lugovoi"));
         assertThat(ADDRESS_LIST.get(2).getLongitude(), is(60.00000000));
-
     }
 
 }

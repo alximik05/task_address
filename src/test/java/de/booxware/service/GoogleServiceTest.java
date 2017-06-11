@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class GoogleServiceTest {
 
     private static final GoogleService GOOGLE_SERVICE = new GoogleService();
-    private static final String MOSCOW_CITY = "Moscow";
+    public static final String MOSCOW_CITY = "Moscow";
     private static final String MOSCOW_CITY_RUS = "Москва";
     private static final String STREET = "Tverskaya";
     private static final String BAD_ADDRESS = "jfksbjksfn4";

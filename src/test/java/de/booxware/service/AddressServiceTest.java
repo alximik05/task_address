@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class AddressServiceTest {
+    private static final String DUPLICATE_PLACE = "Moscow, Russia";
 
     @Autowired
     AddressService addressService;
@@ -31,7 +32,7 @@ public class AddressServiceTest {
         List<Address> allAddresses = addressService.getAllAddresses();
         allAddresses
                 .stream()
-                .filter(address -> address.getAddressStr().equals("Moscow, Russia"))
+                .filter(address -> address.getAddressStr().equals(DUPLICATE_PLACE))
                 .findFirst()
                 .ifPresent(address -> {
                     int lat = address.getLatitude().intValue();
@@ -39,6 +40,12 @@ public class AddressServiceTest {
                     assertEquals(lat, 55);
                     assertEquals(lon, 37);
                 });
+    }
+
+    @Test
+    public void saveBadNewPosition() throws Exception {
+        boolean b = addressService.saveNewPosition(DUPLICATE_PLACE);
+        assertEquals(false, b);
     }
 
 }
