@@ -3,7 +3,7 @@
  */
 
 var MapGoogle = React.createClass({
-    componentDidMount() {
+    handleMap(){
         const moscow = {lat: 55.75222, lng: 37.61556};
         const map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
@@ -23,6 +23,14 @@ var MapGoogle = React.createClass({
                 })
             });
     },
+    componentDidUpdate(updateMap){
+        if (updateMap.needUpdate) {
+            this.handleMap();
+        }
+    },
+    componentDidMount() {
+        this.handleMap();
+    },
     render(){
         return (
             <div id="map">
@@ -34,16 +42,41 @@ var MapGoogle = React.createClass({
 
 
 var Application = React.createClass({
+    getInitialState(){
+        return {
+            updateMap: false
+        }
+    },
+    handleSubmit(event){
+        event.preventDefault();
+        document.getElementById("address").style.borderColor = 'gray';
+        fetch(`http://localhost:8181/saveAddress?address=${event.target.address.value}`, {
+            method: 'POST'
+        })
+            .then( (response) => {
+                return response.json()
+            }).then( (body) => {
+            this.setState({updateMap:body.successError});
+            if (!body.successError) {
+                document.getElementById("address").style.borderColor = 'red';
+            }
+        });
+    },
+    needUpdate(){
+        this.setState({
+            updateMap:this.state.updateMap
+        });
+    },
     render() {
         return (
             <div>
                 <h3>My Google Maps Demo</h3>
-                <form action="saveAddress" method="post">
-                    <label htmlFor="address">Address</label>
-                    <input type="text" id="address" name="address" autoFocus="true"/>
-                    <input type="submit" value="Add"/>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" id="address" name="address" className="focusedInput"
+                           autoFocus="true" placeholder="&#61442; Search address..."/>
+                    <input type="submit" className="addButton" value="Add"/>
                 </form>
-                <MapGoogle/>
+                <MapGoogle needUpdate={this.needUpdate}/>
             </div>
         )
 

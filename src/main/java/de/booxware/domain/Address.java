@@ -14,7 +14,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "address_str")
+    @Column(name = "address_str", unique = true)
     private String addressStr;
 
     @Column(name = "latitude")

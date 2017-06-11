@@ -1,7 +1,6 @@
 package de.booxware.service;
 
 import de.booxware.dao.AddressDao;
-import de.booxware.dao.AddressDaoStub;
 import de.booxware.domain.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

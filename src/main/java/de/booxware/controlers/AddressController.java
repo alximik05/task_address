@@ -1,6 +1,9 @@
 package de.booxware.controlers;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import de.booxware.domain.Address;
 import de.booxware.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +27,15 @@ public class AddressController {
         return "startPage.html";
     }
 
-    @PostMapping("/saveAddress")
-    public String saveNewLocation(@RequestParam("address") String address) {
+    @RequestMapping(value = "/saveAddress", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public String saveNewLocation(@RequestParam(required = false, name = "address") String address) {
         boolean isSave = addressService.saveNewPosition(address);
-        // todo add checks
-        return "redirect:/";
+        Gson gson = new Gson();
+        JsonElement jsonElement = new JsonPrimitive(isSave);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("successError", jsonElement);
+        return gson.toJson(jsonObject);
     }
 
     @GetMapping("/loadAllAddresses")
