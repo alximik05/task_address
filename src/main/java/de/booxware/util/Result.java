@@ -6,11 +6,11 @@ package de.booxware.util;
 public class Result {
 
     private boolean success;
-    private String descpition;
+    private String description;
 
-    public Result(boolean success, String descpition) {
+    public Result(boolean success, String description) {
         this.success = success;
-        this.descpition = descpition;
+        this.description = description;
     }
 
     public Result() {
@@ -24,11 +24,11 @@ public class Result {
         this.success = success;
     }
 
-    public String getDescpition() {
-        return descpition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescpition(String descpition) {
-        this.descpition = descpition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
